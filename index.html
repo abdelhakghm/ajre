@@ -29,15 +29,23 @@
         -webkit-tap-highlight-color: transparent;
         -webkit-touch-callout: none;
         user-select: none;
-        background-color: #ffffff;
+        background-color: #111827; /* Dark background for desktop frame */
         overscroll-behavior-y: none;
+        display: flex;
+        justify-content: center;
+        min-height: 100vh;
+        margin: 0;
       }
 
       #root {
+        width: 100%;
+        max-width: 500px; /* Slightly wider mobile frame */
         min-height: 100vh;
         display: flex;
         flex-direction: column;
         background-color: #f9fafb;
+        position: relative;
+        box-shadow: 0 0 50px rgba(0,0,0,0.3);
       }
 
       .no-scrollbar::-webkit-scrollbar {
@@ -54,9 +62,9 @@
         transition: transform 0.1s ease;
       }
 
-      /* Fix for iOS fixed positioning with keyboard */
+      /* Fix for iOS fill available height */
       @supports (-webkit-touch-callout: none) {
-        .min-h-screen {
+        #root {
           min-height: -webkit-fill-available;
         }
       }
@@ -75,7 +83,7 @@
 }
 </script>
 </head>
-  <body class="bg-white text-gray-900 overflow-x-hidden antialiased">
+  <body class="antialiased">
     <div id="root"></div>
     <script type="module" src="/index.tsx"></script>
   </body>

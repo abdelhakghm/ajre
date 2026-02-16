@@ -17,8 +17,8 @@ const BottomNav: React.FC<BottomNavProps> = ({ activeTab, onTabChange }) => {
 
   return (
     <nav 
-      className="fixed bottom-0 left-0 right-0 bg-white/80 backdrop-blur-xl border-t border-gray-100 flex justify-around items-center z-40 shadow-[0_-1px_10px_rgba(0,0,0,0.02)]" 
-      style={{ paddingBottom: 'calc(env(safe-area-inset-bottom) + 0.5rem)', paddingTop: '0.75rem' }}
+      className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[500px] bg-white/95 backdrop-blur-2xl border-t border-gray-100 flex justify-around items-center z-40 shadow-[0_-10px_30px_rgba(0,0,0,0.05)]" 
+      style={{ paddingBottom: 'calc(env(safe-area-inset-bottom) + 0.75rem)', paddingTop: '0.85rem' }}
     >
       {tabs.map((tab) => {
         const Icon = tab.icon;
@@ -27,12 +27,13 @@ const BottomNav: React.FC<BottomNavProps> = ({ activeTab, onTabChange }) => {
           <button 
             key={tab.id}
             onClick={() => onTabChange(tab.id)}
-            className={`flex flex-col items-center gap-1 group active-scale ${isActive ? 'text-green-600' : 'text-gray-400'}`}
+            className={`flex flex-col items-center gap-1.5 group active-scale relative ${isActive ? 'text-green-600' : 'text-gray-300'}`}
           >
-            <div className={`p-2 rounded-2xl transition-all duration-300 ${isActive ? 'bg-green-50 scale-110' : 'bg-transparent group-hover:bg-gray-50'}`}>
+            <div className={`p-2.5 rounded-[1.25rem] transition-all duration-500 ${isActive ? 'bg-green-50 scale-110 shadow-inner' : 'bg-transparent'}`}>
               <Icon className={`w-6 h-6 ${isActive ? 'stroke-[2.5px]' : 'stroke-[2px]'}`} />
             </div>
-            <span className={`text-[10px] font-bold transition-all ${isActive ? 'opacity-100' : 'opacity-70'}`}>{tab.label}</span>
+            <span className={`text-[10px] font-black tracking-wide transition-all ${isActive ? 'opacity-100' : 'opacity-60'}`}>{tab.label}</span>
+            {isActive && <div className="absolute -top-1 w-1 h-1 rounded-full bg-green-500 animate-pulse" />}
           </button>
         );
       })}

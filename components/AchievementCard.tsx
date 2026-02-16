@@ -16,35 +16,37 @@ const AchievementCard: React.FC<AchievementCardProps> = ({ achievement, value, g
     switch (achievement.type) {
       case AchievementType.PRAYER:
         return (
-          <div className="flex gap-2 w-full mt-3">
-            {gender === 'male' ? (
-              <>
+          <div className="flex flex-col gap-2 w-full mt-4">
+            <div className="flex gap-2">
+              {gender === 'male' ? (
+                <>
+                  <button 
+                    onClick={() => onChange(achievement.id, 'mosque')}
+                    className={`flex-1 py-3 text-[11px] font-black rounded-xl transition-all active:scale-90 ${value === 'mosque' ? 'bg-green-600 text-white shadow-lg shadow-green-100' : 'bg-gray-50 text-gray-500 border border-gray-100'}`}
+                  >
+                    بالمسجد
+                  </button>
+                  <button 
+                    onClick={() => onChange(achievement.id, 'ontime')}
+                    className={`flex-1 py-3 text-[11px] font-black rounded-xl transition-all active:scale-90 ${value === 'ontime' ? 'bg-blue-600 text-white shadow-lg shadow-blue-100' : 'bg-gray-50 text-gray-500 border border-gray-100'}`}
+                  >
+                    بوقتها
+                  </button>
+                </>
+              ) : (
                 <button 
-                  onClick={() => onChange(achievement.id, 'mosque')}
-                  className={`flex-1 py-2 text-[10px] font-bold rounded-lg transition-all active:scale-95 ${value === 'mosque' ? 'bg-green-600 text-white shadow-md' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}
-                >
-                  في المسجد
-                </button>
-                <button 
-                  onClick={() => onChange(achievement.id, 'ontime')}
-                  className={`flex-1 py-2 text-[10px] font-bold rounded-lg transition-all active:scale-95 ${value === 'ontime' ? 'bg-blue-600 text-white shadow-md' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}
+                  onClick={() => onChange(achievement.id, value === 'ontime' ? null : 'ontime')}
+                  className={`flex-1 py-3 text-[11px] font-black rounded-xl transition-all active:scale-90 ${value === 'ontime' ? 'bg-green-600 text-white shadow-lg shadow-green-100' : 'bg-gray-50 text-gray-500 border border-gray-100'}`}
                 >
                   في وقتها
                 </button>
-              </>
-            ) : (
-              <button 
-                onClick={() => onChange(achievement.id, value === 'ontime' ? null : 'ontime')}
-                className={`flex-1 py-2 text-[10px] font-bold rounded-lg transition-all active:scale-95 ${value === 'ontime' ? 'bg-green-600 text-white shadow-md' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}
-              >
-                في وقتها
-              </button>
-            )}
+              )}
+            </div>
             <button 
               onClick={() => onChange(achievement.id, value === 'normal' ? null : 'normal')}
-              className={`px-2 py-2 text-[10px] font-bold rounded-lg transition-all active:scale-95 ${value === 'normal' ? 'bg-orange-600 text-white shadow-md' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}
+              className={`w-full py-2.5 text-[10px] font-black rounded-xl transition-all active:scale-90 ${value === 'normal' ? 'bg-orange-500 text-white shadow-lg shadow-orange-100' : 'bg-gray-50 text-gray-400 border border-gray-100'}`}
             >
-              متأخرة
+              صليت متأخراً
             </button>
           </div>
         );
@@ -53,24 +55,24 @@ const AchievementCard: React.FC<AchievementCardProps> = ({ achievement, value, g
       case AchievementType.PAGES:
         const count = value || 0;
         return (
-          <div className="flex items-center justify-between w-full mt-3 bg-gray-50 p-1 rounded-xl">
+          <div className="flex items-center justify-between w-full mt-4 bg-gray-50 p-1.5 rounded-2xl border border-gray-100">
             <button 
               onClick={() => onChange(achievement.id, Math.max(0, count - 1))}
-              className="w-8 h-8 flex items-center justify-center bg-white rounded-lg shadow-sm text-gray-400 hover:text-red-500 transition-colors active:scale-90"
+              className="w-10 h-10 flex items-center justify-center bg-white rounded-xl shadow-sm text-gray-300 hover:text-red-500 transition-colors active:scale-90"
             >
-              <Minus className="w-3.5 h-3.5" />
+              <Minus className="w-4 h-4" />
             </button>
             <div className="flex flex-col items-center">
-               <span className="text-base font-bold text-green-700 leading-none">{count}</span>
-               <span className="text-[9px] text-gray-400 mt-0.5">
-                {achievement.type === AchievementType.PAGES ? 'صفحة' : 'مرة/ركعة'}
+               <span className="text-xl font-black text-green-700 leading-none">{count}</span>
+               <span className="text-[9px] text-gray-400 font-bold uppercase mt-1">
+                {achievement.type === AchievementType.PAGES ? 'صفحة' : 'مرة'}
                </span>
             </div>
             <button 
               onClick={() => onChange(achievement.id, count + 1)}
-              className="w-8 h-8 flex items-center justify-center bg-white rounded-lg shadow-sm text-gray-400 hover:text-green-500 transition-colors active:scale-90"
+              className="w-10 h-10 flex items-center justify-center bg-white rounded-xl shadow-sm text-gray-300 hover:text-green-600 transition-colors active:scale-90"
             >
-              <Plus className="w-3.5 h-3.5" />
+              <Plus className="w-4 h-4" />
             </button>
           </div>
         );
@@ -79,10 +81,10 @@ const AchievementCard: React.FC<AchievementCardProps> = ({ achievement, value, g
         return (
           <button 
             onClick={() => onChange(achievement.id, !value)}
-            className={`w-full mt-3 py-2.5 rounded-xl flex items-center justify-center gap-2 font-bold transition-all active:scale-95 ${value ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-400 hover:bg-gray-200'}`}
+            className={`w-full mt-4 py-4 rounded-2xl flex items-center justify-center gap-2 font-black transition-all active:scale-90 ${value ? 'bg-green-600 text-white shadow-lg shadow-green-100' : 'bg-gray-50 text-gray-400 border border-gray-100'}`}
           >
-            {value ? <Check className="w-4 h-4" /> : null}
-            <span className="text-xs">{value ? 'تم العمل' : 'تحديد كمكتمل'}</span>
+            {value ? <Check className="w-4 h-4 stroke-[3px]" /> : null}
+            <span className="text-xs uppercase tracking-tight">{value ? 'تم الإنجاز' : 'تم العمل'}</span>
           </button>
         );
       
@@ -92,22 +94,22 @@ const AchievementCard: React.FC<AchievementCardProps> = ({ achievement, value, g
   };
 
   return (
-    <div className="bg-white rounded-2xl p-4 shadow-sm border border-gray-100 flex flex-col items-start min-w-[155px] max-w-[155px] flex-shrink-0 transition-transform hover:translate-y-[-2px]">
-      <div className="flex justify-between items-start w-full mb-3">
+    <div className="bg-white rounded-[2rem] p-5 shadow-sm border border-gray-100 flex flex-col items-center min-w-[170px] max-w-[170px] flex-shrink-0 transition-all hover:shadow-md snap-center">
+      <div className="flex justify-between items-start w-full mb-4">
         <div 
-          className="w-10 h-10 rounded-xl flex items-center justify-center bg-opacity-10 transition-transform group hover:scale-110"
-          style={{ backgroundColor: `${achievement.iconColor}20` }}
+          className="w-12 h-12 rounded-2xl flex items-center justify-center shadow-inner"
+          style={{ backgroundColor: `${achievement.iconColor}10` }}
         >
           <i className={`${achievement.icon} text-xl`} style={{ color: achievement.iconColor }}></i>
         </div>
         <button 
           onClick={() => onInfo(achievement)}
-          className="text-gray-300 hover:text-blue-500 transition-colors p-1"
+          className="text-gray-200 hover:text-blue-500 transition-colors p-1"
         >
-          <Info className="w-4 h-4" />
+          <Info className="w-5 h-5" />
         </button>
       </div>
-      <h3 className="font-bold text-gray-800 text-xs truncate w-full">{achievement.name}</h3>
+      <h3 className="font-black text-gray-900 text-sm text-center tracking-tight leading-tight px-1 h-10 flex items-center">{achievement.name}</h3>
       {renderControl()}
     </div>
   );
