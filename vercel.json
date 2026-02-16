@@ -1,7 +1,5 @@
 
 {
-  "buildCommand": "echo 'Build complete'",
-  "outputDirectory": ".",
   "rewrites": [
     {
       "source": "/(.*)",
